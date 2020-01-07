@@ -43,7 +43,6 @@ export default {
       search: '',
       statusAdd: false,
       newList: {
-        id: 0,
         label: ''
       }
     }
@@ -53,7 +52,8 @@ export default {
       return this.$store.getters.allList
     },
     searchResult() {
-      return this.list//.filter(item => item.label.toLowerCase().includes(this.search.toLowerCase()))
+      console.log(this.list.filter(item => item.label.toLowerCase().includes(this.search.toLowerCase())))
+      return this.list !== null ? this.list.filter(item => item.label.toLowerCase().includes(this.search.toLowerCase())) : null
     },
   },
   methods: {
