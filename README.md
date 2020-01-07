@@ -1,9 +1,10 @@
-# todo
+# TODO-front-end
 
 ## Project setup
 ```
 npm install
 ```
+### Before start, run [API](https://github.com/PaBLyS/TODO-back-end/)
 
 ### Compiles and hot-reloads for development
 ```
