@@ -11,28 +11,30 @@
 </template>
 
 <script>
-  export default {
-    name: 'customList',
-    props: {
-      label: String,
-      index: Number
+import axios from 'axios'
+
+export default {
+  name: 'customList',
+  props: {
+    label: String,
+    index: Number
+  },
+  data() {
+    return {
+      status: true,
+      newLabel: this.label
+    }
+  },
+  methods: {
+    save() {
+      this.$store.commit('editList', {id: this.index, label: this.newLabel})
+      this.status = true
     },
-    data() {
-      return {
-        status: true,
-        newLabel: this.label
-      }
-    },
-    methods: {
-      save() {
-        this.$store.commit('editList', {id: this.index, label: this.newLabel})
-        this.status = true
-      },
-      deleteList() {
-        this.$store.commit('removeList', this.index)
-      }
+    deleteList() {
+      this.$store.commit('removeList', this.index)
     }
   }
+}
 </script>
 
 <style lang="scss" scoped>

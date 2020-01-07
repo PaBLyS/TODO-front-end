@@ -30,10 +30,14 @@
 
 <script>
 import customList from '../src/components/customList'
+import axios from 'axios'
 
 export default {
   name: 'app',
   components: {customList},
+  beforeCreate() {
+    this.$store.dispatch('fetchList');
+  },
   data() {
     return {
       search: '',
@@ -49,12 +53,12 @@ export default {
       return this.$store.getters.allList
     },
     searchResult() {
-      return this.list.filter(item => item.label.toLowerCase().includes(this.search.toLowerCase()))
+      return this.list//.filter(item => item.label.toLowerCase().includes(this.search.toLowerCase()))
     },
   },
   methods: {
     createList() {
-      this.$store.commit('addList', {...this.newList})
+      this.$store.dispatch('addList', {...this.newList});
       this.statusAdd = false
       this.newList = {
         id: 0,
