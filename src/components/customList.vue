@@ -27,11 +27,11 @@ export default {
   },
   methods: {
     save() {
-      this.$store.commit('editList', {id: this.index, label: this.newLabel})
+      this.$store.dispatch('updateList', {id: this.index, label: this.newLabel})
       this.status = true
     },
     deleteList() {
-      this.$store.commit('removeList', this.index)
+      this.$store.dispatch('deleteList', this.index)
     }
   }
 }

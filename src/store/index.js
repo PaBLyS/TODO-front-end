@@ -34,11 +34,25 @@ export default new Vuex.Store({
       })
       context.dispatch('fetchList');
     },
+    async updateList(context, obj) {
+      const list = axios({
+        method: 'put',
+        url: `${url}list/${obj.id}`,
+        data: obj
+      })
+      context.dispatch('fetchList');
+    },
+    async deleteList(context, id) {
+      const list = await axios({
+        method: 'delete',
+        url: `${url}list/${id}`
+      })
+      context.dispatch('fetchList');
+    },
     async clearList(context) {
       const list = await axios({
-        method: 'post',
-        url: `${url}list`,
-        data: obj,
+        method: 'delete',
+        url: `${url}list`
       })
       context.dispatch('fetchList');
     }

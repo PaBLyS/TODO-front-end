@@ -22,7 +22,7 @@
         <custom-list v-for="(elem, index) in searchResult"
                       :key="index"
                       :label="elem.label"
-                      :index="index"/>
+                      :index="elem.id"/>
       </b-col>
     </b-row>
   </b-container>
@@ -66,7 +66,7 @@ export default {
       }
     },
     removeAll() {
-      this.$store.commit('clearAll')
+      this.$store.dispatch('clearList')
     }
   }
 }
