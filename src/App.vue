@@ -1,9 +1,10 @@
 <template>
   <b-container fluid id="app" class="app">
     <b-row class="justify-content-between">
-      <b-col cols="4">
+      <b-col>
         <b-button variant="success" class="app__button" @click="statusAdd = !statusAdd">Создать новый лист</b-button>
         <b-button variant="danger" class="app__button" @click="removeAll()">Удалить Все</b-button>
+        <b-button variant="primary" class="app__button" @click="createDefault()">Генерирувать</b-button>
       </b-col>
       <b-col cols="2">
         <b-form-input v-model="search" placeholder="Search"></b-form-input>
@@ -66,6 +67,12 @@ export default {
     },
     removeAll() {
       this.$store.dispatch('clearList')
+    },
+    createDefault() {
+      let arr = this.$store.getters.defaultList;
+      for (let elem of arr) {
+        this.$store.dispatch('addList', {...elem})
+      }
     }
   }
 }
