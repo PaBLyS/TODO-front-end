@@ -4,14 +4,14 @@
       <b-col>
         <b-button variant="success" class="app__button" @click="statusAdd = !statusAdd">Создать новый лист</b-button>
         <b-button variant="danger" class="app__button" @click="removeAll()">Удалить Все</b-button>
-        <b-button variant="primary" class="app__button" @click="createDefault()">Генерирувать</b-button>
+        <b-button variant="primary" class="app__button" @click="createDefault()">Генерировать</b-button>
       </b-col>
-      <b-col cols="2">
+      <b-col cols="12" md="3">
         <b-form-input v-model="search" placeholder="Search"></b-form-input>
       </b-col>
     </b-row>
     <b-row class="justify-content-center" v-if="statusAdd">
-      <b-col cols="3">
+      <b-col cols="4">
         <b-button-group>
           <input type="text" v-model="newList.label">
           <b-button variant="success" @click="createList()">Добавить</b-button>
@@ -19,7 +19,10 @@
       </b-col>
     </b-row>
     <b-row>
-      <b-col cols="12">
+      <b-col cols="12" v-if="!status">
+        <loader />
+      </b-col>
+      <b-col cols="12" v-else>
         <custom-list v-for="(elem, index) in searchResult"
                       :key="`${elem.label}-${index}`"
                       :label="elem.label"
@@ -32,10 +35,11 @@
 <script>
 import customList from '../src/components/customList'
 import axios from 'axios'
+import loader from '../src/components/loader'
 
 export default {
   name: 'app',
-  components: {customList},
+  components: {customList, loader},
   beforeCreate() {
     this.$store.dispatch('fetchList');
   },
@@ -53,8 +57,11 @@ export default {
       return this.$store.getters.allList
     },
     searchResult() {
-      return this.list !== null ? this.list.filter(item => item.label.toLowerCase().includes(this.search.toLowerCase())) : null
+      return this.status ? this.list.filter(item => item.label.toLowerCase().includes(this.search.toLowerCase())) : null
     },
+    status() {
+      return this.list !== null
+    }
   },
   methods: {
     createList() {
@@ -83,7 +90,10 @@ export default {
     margin: 20px 0;
 
     &__button {
-      margin-right: 10px;
+      margin: {
+        right: 10px;
+        bottom: 10px;
+      }
     }
   }
 </style>
