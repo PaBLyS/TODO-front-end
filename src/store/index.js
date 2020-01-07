@@ -27,7 +27,7 @@ export default new Vuex.Store({
 
     },
     async addList(context, obj) {
-      const list = await axios({
+      await axios({
         method: 'post',
         url: `${url}list`,
         data: obj,
@@ -35,7 +35,7 @@ export default new Vuex.Store({
       context.dispatch('fetchList');
     },
     async updateList(context, obj) {
-      const list = axios({
+      axios({
         method: 'put',
         url: `${url}list/${obj.id}`,
         data: obj
@@ -43,14 +43,14 @@ export default new Vuex.Store({
       context.dispatch('fetchList');
     },
     async deleteList(context, id) {
-      const list = await axios({
+      await axios({
         method: 'delete',
         url: `${url}list/${id}`
       })
       context.dispatch('fetchList');
     },
     async clearList(context) {
-      const list = await axios({
+      await axios({
         method: 'delete',
         url: `${url}list`
       })

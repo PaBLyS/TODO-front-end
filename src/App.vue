@@ -20,7 +20,7 @@
     <b-row>
       <b-col cols="12">
         <custom-list v-for="(elem, index) in searchResult"
-                      :key="index"
+                      :key="`${elem.label}-${index}`"
                       :label="elem.label"
                       :index="elem.id"/>
       </b-col>
@@ -52,7 +52,6 @@ export default {
       return this.$store.getters.allList
     },
     searchResult() {
-      console.log(this.list.filter(item => item.label.toLowerCase().includes(this.search.toLowerCase())))
       return this.list !== null ? this.list.filter(item => item.label.toLowerCase().includes(this.search.toLowerCase())) : null
     },
   },
